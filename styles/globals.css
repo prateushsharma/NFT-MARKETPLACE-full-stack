@@ -3,7 +3,10 @@
 @tailwind utilities;
 
 /* Home.module.css */
-
+.Toastify__spinner {
+  border-color: var(--toastify-spinner-color-empty-area) !important;
+  border-right-color: var(--toastify-spinner-color) !important;
+}
 
 
 

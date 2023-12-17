@@ -23,7 +23,9 @@ export const hookFactory: ListedNftsHookFactory = ({contract}) => () => {
       for (let i = 0; i < coreNfts.length; i++) {
         const item = coreNfts[i];
         const tokenURI = await contract!.tokenURI(item.tokenId);
-        const metaRes = await fetch(tokenURI);
+
+
+        const metaRes = await fetch(`/api/fetch?fetchUrl=${tokenURI}`);
         const meta = await metaRes.json();
 
         nfts.push({

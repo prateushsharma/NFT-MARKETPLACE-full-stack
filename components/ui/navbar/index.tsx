@@ -9,10 +9,10 @@ import Walletbar from './Walletbar';
 const navigation = [
   { name: 'Marketplace', href: '/', current: true },
   { name: 'Create', href: '/nft/create', current: false }
-]
+];
 
 function classNames(...classes: string[]) {
-  return classes.filter(Boolean).join(' ')
+  return classes.filter(Boolean).join(' ');
 }
 
 export default function Navbar() {
@@ -26,7 +26,7 @@ export default function Navbar() {
           <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
             <div className="relative flex items-center justify-between h-16">
               <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
-                {/* Mobile menu butt*/}
+                {/* Mobile menu butt */}
                 <Disclosure.Button className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
                   <span className="sr-only">Open main menu</span>
                   {open ? (
@@ -36,14 +36,16 @@ export default function Navbar() {
                   )}
                 </Disclosure.Button>
               </div>
+              {/* Add the link */}
+              <div className="flex-shrink-0 flex items-center">
+                <a
+                  href="https://www.linkedin.com/in/prateushsharma/"
+                  className="text-white font-bold text-xl px-3 py-2 rounded-md transition-all duration-300 ease-in-out hover:bg-gray-700 hover:text-white"
+                >
+                  PRATEUSH KA NFT MARKET PLACE
+                </a>
+              </div>
               <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
-                <div className="flex-shrink-0 flex items-center">
-                  <img
-                    className="hidden lg:block h-10 w-auto"
-                    src="/images/page_logo.png"
-                    alt="Workflow"
-                  />
-                </div>
                 <div className="hidden sm:block sm:ml-6">
                   <div className="flex space-x-4">
                     {navigation.map((item) => (
@@ -53,8 +55,10 @@ export default function Navbar() {
                         activeClass="bg-gray-900 text-white"
                       >
                         <a
-                          className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                          aria-current={item.current ? 'page' : undefined}
+                          className={classNames(
+                            'text-gray-300 px-3 py-2 rounded-md text-sm font-medium',
+                            { 'bg-gray-900 text-white': item.current }
+                          )}
                         >
                           {item.name}
                         </a>
@@ -69,7 +73,7 @@ export default function Navbar() {
                     <svg className="-ml-0.5 mr-1.5 h-2 w-2 text-indigo-400" fill="currentColor" viewBox="0 0 8 8">
                       <circle cx={4} cy={4} r={3} />
                     </svg>
-                    { network.isLoading ?
+                    {network.isLoading ?
                       "Loading..." :
                       account.isInstalled ?
                       network.data :
@@ -95,8 +99,8 @@ export default function Navbar() {
                   as="a"
                   href={item.href}
                   className={classNames(
-                    item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                    'block px-3 py-2 rounded-md text-base font-medium'
+                    'block px-3 py-2 rounded-md text-base font-medium',
+                    { 'bg-gray-900 text-white': item.current }
                   )}
                   aria-current={item.current ? 'page' : undefined}
                 >
@@ -108,5 +112,5 @@ export default function Navbar() {
         </>
       )}
     </Disclosure>
-  )
+  );
 }
