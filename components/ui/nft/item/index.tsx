@@ -6,13 +6,13 @@ import { NftMeta, Nft } from "../../../../types/nft";
 type NftItemProps = {
   item: Nft;
   buyNft: (token: number, value: number) => Promise<void>;
-}
+};
 
 function shortifyAddress(address: string) {
-  return `0x****${address.slice(-4)}`
+  return `0x****${address.slice(-4)}`;
 }
 
-const NftItem: FunctionComponent<NftItemProps> = ({item, buyNft}) => {
+const NftItem: FunctionComponent<NftItemProps> = ({ item, buyNft }) => {
   return (
     <>
       <div className="flex-shrink-0">
@@ -58,16 +58,18 @@ const NftItem: FunctionComponent<NftItemProps> = ({item, buyNft}) => {
                 </div>
               </dd>
             </div>
-            { item.meta.attributes.map(attribute =>
-              <div key={attribute.trait_type} className="flex flex-col px-4 pt-4">
-                <dt className="order-2 text-sm font-medium text-gray-500">
-                  {attribute.trait_type}
-                </dt>
-                <dd className="order-1 text-xl font-extrabold text-indigo-600">
-                  {attribute.value}
-                </dd>
-              </div>
-            )}
+            {item.meta.attributes &&
+              item.meta.attributes.length > 0 &&
+              item.meta.attributes.map((attribute) => (
+                <div key={attribute.trait_type} className="flex flex-col px-4 pt-4">
+                  <dt className="order-2 text-sm font-medium text-gray-500">
+                    {attribute.trait_type}
+                  </dt>
+                  <dd className="order-1 text-xl font-extrabold text-indigo-600">
+                    {attribute.value}
+                  </dd>
+                </div>
+              ))}
           </dl>
         </div>
         <div>
@@ -89,7 +91,7 @@ const NftItem: FunctionComponent<NftItemProps> = ({item, buyNft}) => {
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
 export default NftItem;
