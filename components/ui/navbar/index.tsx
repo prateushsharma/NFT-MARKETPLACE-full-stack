@@ -98,9 +98,10 @@ export default function Navbar() {
                   key={item.name}
                   as="a"
                   href={item.href}
-                  className={classNames(
-                    'block px-3 py-2 rounded-md text-base font-medium',
-                    { 'bg-gray-900 text-white': item.current }
+                  className={classNames('text-gray-300 px-3 py-2 rounded-md text-sm font-medium', {
+                    'bg-gray-900': item.current,
+                    'text-white': item.current
+                    }
                   )}
                   aria-current={item.current ? 'page' : undefined}
                 >
