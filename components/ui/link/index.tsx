@@ -1,31 +1,30 @@
-import Link from "next/link"
-import React, { FunctionComponent, ReactElement } from "react"
-import { useRouter } from "next/router"
+import Link, { LinkProps as NextLinkProps } from "next/link";
+import React, { FunctionComponent, ReactElement } from "react";
+import { useRouter } from "next/router";
 
 type LinkProps = {
-  href: string
-  children: ReactElement
-  activeClass: string
-}
+  href: string;
+  children: ReactElement;
+  activeClass: string;
+} & NextLinkProps; // Extend NextLinkProps
 
-const ActiveLink: FunctionComponent<LinkProps> = ({children, ...props}) => {
-  const { pathname } = useRouter()
-  let className = children!.props.className || ""
-  let _defaultClass = `${className} text-gray-100`
+const ActiveLink: FunctionComponent<LinkProps> = ({ children, activeClass, ...props }) => {
+  const { pathname } = useRouter();
+  const isCurrent = pathname === props.href;
 
-  if (pathname === props.href) {
-    className = `${className} text-indigo-400 ${props.activeClass}`
-  } else {
-    className = _defaultClass;
-  }
+  const combinedClassNames = [
+    children.props.className || '',
+    'text-gray-100',
+    isCurrent ? 'text-indigo-400' : '',
+    isCurrent && activeClass ? activeClass : '',
+    isCurrent ? 'bg-gray-900 text-white' : '',
+  ].filter(Boolean).join(' ');
 
   return (
-    <Link {...props} legacyBehavior>
-      {
-        React.cloneElement(children, {className})
-      }
+    <Link {...props}>
+      {React.cloneElement(children, { className: combinedClassNames } as React.HTMLAttributes<HTMLAnchorElement>)}
     </Link>
   );
-}
+};
 
 export default ActiveLink;
