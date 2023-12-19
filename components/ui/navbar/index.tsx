@@ -57,7 +57,7 @@ export default function Navbar() {
                         <a
                           className={classNames(
                             'text-gray-300 px-3 py-2 rounded-md text-sm font-medium',
-                            { 'bg-gray-900 text-white': item.current }
+                            { 'bg-gray-900' : item.current, 'text-white' : item.current }
                           )}
                         >
                           {item.name}
