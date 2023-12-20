@@ -11,10 +11,6 @@ const navigation = [
   { name: 'Create', href: '/nft/create', current: false }
 ];
 
-function classNames(...classes: string[]) {
-  return classes.filter(Boolean).join(' ');
-}
-
 export default function Navbar() {
   const { account } = useAccount();
   const { network } = useNetwork();
@@ -26,7 +22,6 @@ export default function Navbar() {
           <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
             <div className="relative flex items-center justify-between h-16">
               <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
-                {/* Mobile menu butt */}
                 <Disclosure.Button className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
                   <span className="sr-only">Open main menu</span>
                   {open ? (
@@ -36,7 +31,6 @@ export default function Navbar() {
                   )}
                 </Disclosure.Button>
               </div>
-              {/* Add the link */}
               <div className="flex-shrink-0 flex items-center">
                 <a
                   href="https://www.linkedin.com/in/prateushsharma/"
@@ -55,10 +49,10 @@ export default function Navbar() {
                         activeClass="bg-gray-900 text-white"
                       >
                         <a
-                          className={classNames(
-                            'text-gray-300 px-3 py-2 rounded-md text-sm font-medium',
-                            { 'bg-gray-900' : item.current, 'text-white' : item.current }
-                          )}
+                          className={Object.keys({
+                            'bg-gray-900': item.current,
+                            'text-white': item.current
+                          }).filter(key => item.current && key).join(' ')}
                         >
                           {item.name}
                         </a>
@@ -98,11 +92,10 @@ export default function Navbar() {
                   key={item.name}
                   as="a"
                   href={item.href}
-                  className={classNames('text-gray-300 px-3 py-2 rounded-md text-sm font-medium', {
+                  className={Object.keys({
                     'bg-gray-900': item.current,
                     'text-white': item.current
-                    }
-                  )}
+                  }).filter(key => item.current && key).join(' ')}
                   aria-current={item.current ? 'page' : undefined}
                 >
                   {item.name}
