@@ -6,6 +6,10 @@ import { useAccount, useNetwork } from '@hooks/web3';
 import ActiveLink from '../link';
 import Walletbar from './Walletbar';
 
+function classNames(...classes: string[])
+{
+  return classes.filter(Boolean).join(' ')
+}
 const navigation = [
   { name: 'Marketplace', href: '/', current: true },
   { name: 'Create', href: '/nft/create', current: false }
@@ -49,10 +53,12 @@ export default function Navbar() {
                         activeClass="bg-gray-900 text-white"
                       >
                         <a
-                          className={Object.keys({
-                            'bg-gray-900': item.current,
-                            'text-white': item.current
-                          }).filter(key => item.current && key).join(' ')}
+                       className={classNames('text-gray-300 px-3 py-2 rounded-md text-sm font-medium', {
+                        'bg-gray-900':item.current,
+                        'text-white':item.current
+                        }
+                      )}
+                      
                         >
                           {item.name}
                         </a>
@@ -92,10 +98,13 @@ export default function Navbar() {
                   key={item.name}
                   as="a"
                   href={item.href}
-                  className={Object.keys({
+                  className={classNames('text-gray-300 px-3 py-2 rounded-md text-sm font-medium', {
                     'bg-gray-900': item.current,
                     'text-white': item.current
-                  }).filter(key => item.current && key).join(' ')}
+                    }
+                  )}
+                  
+                 
                   aria-current={item.current ? 'page' : undefined}
                 >
                   {item.name}
